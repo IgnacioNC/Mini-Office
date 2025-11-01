@@ -67,4 +67,5 @@ Permite crear, editar y guardar documentos de texto con formato, incorporando fu
 ## Autor
 
 Ignacio Manuel<br>
-Desarrollo de Aplicaciones Multiplataforma (DAM)
+Desarrollo de Aplicaciones Multiplataforma (DAM)<br>
+Módulo: Desarrollo de Interfaces
