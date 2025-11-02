@@ -409,12 +409,14 @@ class Ventana(QMainWindow):
            
            self.contenedorDock.setVisible(False)
            self.texto.setExtraSelections([])
+           self.texto.setFocus()
            self.statusBarMessage()
 
     def cambioVisibilidadDock(self, visible):
         if not visible:
             self.texto.setExtraSelections([])
             self.statusBarMessage()
+            self.texto.setFocus()
 
     def resaltarPalabras(self, palabra):
 
@@ -470,6 +472,10 @@ class Ventana(QMainWindow):
 
     def buscarTodasPalabras(self):
 
+        # Comprobar si existe el atributo o si existe la palabra
+        if not hasattr(self, 'palabra') or not self.palabra:
+            return
+
         self.resaltarPalabras(self.palabra)
 
     def buscarPalabra(self):
@@ -481,6 +487,9 @@ class Ventana(QMainWindow):
 
         if not buscarPalabra:
             self.texto.setExtraSelections([])
+            self.palabra = ""
+            self.limpiarCursor()
+            return
 
         self.palabra = buscarPalabra # Guardar la palabra para buscarSiguientePalabra o buscarAnteriorPalabra
 
@@ -490,11 +499,16 @@ class Ventana(QMainWindow):
 
         if cursor.isNull(): # Si no coincide limpiar resaltados
             self.texto.setExtraSelections([])
+            self.limpiarCursor()
+            return
 
         self.resaltarCursor(cursor)        # Pinta fondo con ExtraSelection
         self.texto.setTextCursor(cursor)   # Mover vista a la palabra encontrada
 
     def buscarSiguientePalabra(self):
+
+        if not hasattr(self, 'palabra') or not self.palabra:
+            return
 
         documento = self.texto.document()
         inicio = self.texto.textCursor()
@@ -511,6 +525,9 @@ class Ventana(QMainWindow):
 
     def buscarAnteriorPalabra(self):
 
+        if not hasattr(self, 'palabra') or not self.palabra:
+            return
+        
         documento = self.texto.document()
         inicio = self.texto.textCursor()
 
@@ -527,6 +544,9 @@ class Ventana(QMainWindow):
 
     def reemplazarPalabra(self):
 
+        if not hasattr(self, 'palabra') or not self.palabra:
+            return
+
         cursor = self.texto.textCursor()
 
         if cursor.hasSelection() and cursor.selectedText() == self.palabra:
@@ -536,9 +556,17 @@ class Ventana(QMainWindow):
 
     def reemplazarTodasPalabras(self):
 
+        if not hasattr(self, 'palabra') or not self.palabra:
+            return
+
         textoCompleto = self.texto.toPlainText()
         textoModificado = textoCompleto.replace(self.palabra, self.textoReemplazarPalabra.text())
         self.texto.setPlainText(textoModificado)
+
+    def limpiarCursor(self): # Limpia el cursor
+        cursor = self.texto.textCursor()
+        cursor.clearSelection()
+        self.texto.setTextCursor(cursor)    
 
     def statusBar(self):
 
