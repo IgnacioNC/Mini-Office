@@ -5,6 +5,10 @@ Permite crear, editar y guardar documentos de texto con formato, incorporando fu
 
 ---
 
+![Captura](images/app.png)
+
+---
+
 ## Funcionalidades principales
 
 ### Gestión de archivos
