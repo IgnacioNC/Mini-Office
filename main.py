@@ -1,9 +1,8 @@
 import os
 
-from PySide6.QtWidgets import QMainWindow,QApplication, QLabel, QWidget, QDockWidget, QTextEdit, QToolBar, QMainWindow, QFileDialog, QStatusBar, QHBoxLayout, QPushButton, QLineEdit, QVBoxLayout, QColorDialog, QFontDialog
+from PySide6.QtWidgets import QMainWindow,QApplication, QLabel, QWidget, QDockWidget, QTextEdit, QToolBar, QFileDialog, QStatusBar, QHBoxLayout, QPushButton, QLineEdit, QVBoxLayout, QColorDialog, QFontDialog
 from PySide6.QtGui import QAction, QIcon, QKeySequence, QTextCursor, QTextCharFormat, QFont, QColor, QTextDocument
 from PySide6.QtCore import Qt, QSize
-from html import escape
 
 class Ventana(QMainWindow):
     def __init__(self):
@@ -54,7 +53,9 @@ class Ventana(QMainWindow):
 
         panelLetra = QWidget()
         layoutLetra = QHBoxLayout(panelLetra)
-        layoutLetra.setAlignment(Qt.AlignTop)
+        layoutLetra.setContentsMargins(5, 5, 0, 0)
+        layoutLetra.setSpacing(8)
+        layoutLetra.setAlignment(Qt.AlignLeft)  # Alinea los botones a la izquierda
 
         botonFuente = QPushButton(QIcon(self.iconoLetraFuente), "")
         self.botonNegrita = QPushButton(QIcon(self.iconoLetraNegrita), "")
@@ -109,13 +110,9 @@ class Ventana(QMainWindow):
         self.contenedorDockLetra = QDockWidget()
         self.contenedorDockLetra.setWidget(panelLetra)
 
-        layoutLetra.setContentsMargins(5, 5, 0, 0)
         self.contenedorDockLetra.setFixedHeight(35)    # Esto provoca que no pueda ajustar la altura el usuario
-        layoutLetra.setSpacing(8)
-        layoutLetra.setAlignment(Qt.AlignLeft)  # Alinea los botones a la izquierda
 
         self.contenedorDockLetra.setTitleBarWidget(QWidget()) # Quita la barra de título vacía
-        self.contenedorDockLetra.setAllowedAreas(Qt.TopDockWidgetArea)
         self.addDockWidget(Qt.TopDockWidgetArea, self.contenedorDockLetra)
 
         botonFuente.clicked.connect(self.elegirFuente)
@@ -194,8 +191,6 @@ class Ventana(QMainWindow):
 
     def crearLayoutBusqueda(self):
 
-        self.setCentralWidget(self.texto)
-
         panelDerecho = QWidget()
         layoutDerecho = QVBoxLayout(panelDerecho)
         layoutDerecho.setAlignment(Qt.AlignTop) 
@@ -239,7 +234,7 @@ class Ventana(QMainWindow):
         self.contenedorDock.setWidget(panelDerecho)
         self.contenedorDock.setVisible(False)
         #self.contenedorDock.setFloating(True) # Inicia flotando
-        self.contenedorDock.move(1220, 133.5)
+        #self.contenedorDock.move(1220, 133.5) # Posición en la que aparecería flotando
         self.contenedorDock.topLevelChanged.connect(self.cambiarTamanioLayoutBusqueda)
         self.contenedorDock.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea)
         self.contenedorDock.setFeatures(QDockWidget.DockWidgetMovable | QDockWidget.DockWidgetFloatable | QDockWidget.DockWidgetClosable)
