@@ -68,6 +68,38 @@ Permite crear, editar y guardar documentos de texto con formato, incorporando fu
 
 ---
 
+## Pasos para generar el ejecutador .exe
+
+- Instalar pipx para utilizarlo como instalador en lugar de pip, así evitamos conflictos con dependencias y otros problemas.
+
+![Captura](images/capturas/1.png)
+
+- Agregamos pipx a las variable de entorno del sistema para poder usarlo como comando desde terminal.
+
+![Captura](images/capturas/2.png)
+
+- Instalar pipenv que sirve para gestionar las dependencias y el entorno virtual que vamos a usar.
+
+![Captura](images/capturas/3.png)
+
+- Inicializar el entorno virtual.
+
+![Captura](images/capturas/4.png)
+
+- Instalar las dependencias necesarias sobre el entorno virtual, en este caso pyside6 y pyinstaller.
+
+![Captura](images/capturas/5.png)
+
+- Entramos al subshell.
+
+![Captura](images/capturas/6.png)
+
+- Ahora hay que generar el .exe en un único archivo con --onefile, --noconsole para evitar ver se despliegue la consola al ejecutarlo, --name para definir el nombre del .exe, --icon para definir el icono y --add-data para agregar las imagenes y otros recursos de los que dependan el proyecto.
+
+![Captura](images/capturas/7.png)
+
+---
+
 ## Autor
 
 Ignacio Manuel<br>
