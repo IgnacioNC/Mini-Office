@@ -100,6 +100,111 @@ Permite crear, editar y guardar documentos de texto con formato, incorporando fu
 
 ---
 
+## Firma digital del ejecutable
+
+- Creación del certificado y comprobación.
+
+![Captura](images/capturas/Screenshot_3.png)  
+![Captura](images/capturas/Screenshot_4.png)
+
+- Asignación de la contraseña al .pfx
+
+![Captura](images/capturas/Screenshot_5.png)
+
+- Exportación del certificado al escritorio.
+
+![Captura](images/capturas/Screenshot_6.png)
+
+- Instalación del SDK para las firmas de windows y lo agregamos al path del sistema.
+
+![Captura](images/capturas/Screenshot_7.png)  
+![Captura](images/capturas/Screenshot_8.png)
+
+- Firma aplicada al ejecutable y verificación.
+
+![Captura](images/capturas/Screenshot_9.png)
+![Captura](images/capturas/Screenshot_10.png)
+
+---
+
+## Creación del instalador con Inno Setup
+
+Para generar un instalador profesional se utilizó **Inno Setup**, configurando los parámetros.
+
+- Instalación de Inno Setup
+
+![Captura](images/capturas/Screenshot_11.png)
+
+- En lugar de crear un Script en blanco, he utilizado el de Wizard.
+
+![Captura](images/capturas/Screenshot_12.png)
+
+- Proceso de instalación.
+
+![Captura](images/capturas/Screenshot_13.png)
+![Captura](images/capturas/Screenshot_14.png)
+![Captura](images/capturas/Screenshot_15.png)
+![Captura](images/capturas/Screenshot_16.png)
+(Importante que si quieres que se genere el desinstalador marques la opción)
+
+- Selección de licencia MIT.
+
+![Captura](images/capturas/Screenshot_17.png)
+
+- Continuación de la instalación.
+
+![Captura](images/capturas/Screenshot_18.png)
+![Captura](images/capturas/Screenshot_19.png)
+![Captura](images/capturas/Screenshot_20.png)
+
+- Nombre del instalador cuando se genere y dirección del icono que tendrá.
+
+![Captura](images/capturas/Screenshot_22.png)
+
+- Estilo que tendrá el instalador.
+
+![Captura](images/capturas/Screenshot_23.png)
+
+- Script del .iss una vez generado y configurado.
+
+![Captura](images/capturas/Screenshot_25.png)
+
+- Se han cambiado las rutas absolutas por rutas relativas y luego se ha compilado.
+
+![Captura](images/capturas/Screenshot_26.png)
+
+- Una vez generado el instalador, comprobar que funciona.
+
+![Captura](images/capturas/Screenshot_28.png)
+![Captura](images/capturas/Screenshot_29.png)
+![Captura](images/capturas/Screenshot_31.png)
+
+---
+
+## Publicación del instalador y el .exe en GitHub Releases
+
+Para no subir ejecutables al repositorio, se usa **GitHub Releases**.
+
+- Instalación de GitHub CLI.
+
+![Captura](images/capturas/Screenshot_32.png)
+
+- Autenticación en cuenta de GitHub.
+
+![Captura](images/capturas/Screenshot_33.png)
+
+- Creación de la release desde terminal.
+
+![Captura](images/capturas/Screenshot_35.png)
+
+- Resultado final por terminal
+
+![Captura](images/capturas/Screenshot_36.png)
+
+El instalador puede descargarse desde la sección **Releases** del repositorio.
+
+---
+
 ## Autor
 
 Ignacio Manuel<br>
