@@ -61,12 +61,12 @@ Permite crear, editar y guardar documentos de texto con formato, incorporando fu
 
 ---
 
-## 🎤 Comandos de voz
+## Comandos de voz
 
 MiniOffice incluye un sistema de **reconocimiento de voz** que permite ejecutar acciones del editor mediante comandos hablados.  
 Para activarlo, selecciona **Editar → Reconocer voz** o pulse el icono del micrófono.
 
-### 🗣️ Comandos disponibles
+### Comandos disponibles
 
 | Comando                              | Acción realizada                       |
 | ------------------------------------ | -------------------------------------- |
@@ -76,7 +76,7 @@ Para activarlo, selecciona **Editar → Reconocer voz** o pulse el icono del mic
 | **"nuevo"** / **"nuevo documento"**  | Crea un archivo en blanco              |
 | **"guardar"** /**"guardar archivo"** | Guarda el archivo actual               |
 
-### 📝 Funcionamiento
+### Funcionamiento
 
 El sistema escucha **un único comando** al activarse y ejecuta la acción correspondiente.  
 Su objetivo es permitir **control por voz del editor**, no dictado continuo de texto.
