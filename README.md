@@ -61,6 +61,28 @@ Permite crear, editar y guardar documentos de texto con formato, incorporando fu
 
 ---
 
+## 🎤 Comandos de voz
+
+MiniOffice incluye un sistema de **reconocimiento de voz** que permite ejecutar acciones del editor mediante comandos hablados.  
+Para activarlo, selecciona **Editar → Reconocer voz** o pulse el icono del micrófono.
+
+### 🗣️ Comandos disponibles
+
+| Comando                              | Acción realizada                       |
+| ------------------------------------ | -------------------------------------- |
+| **"negrita"**                        | Activa o desactiva el texto en negrita |
+| **"cursiva"**                        | Activa o desactiva la cursiva          |
+| **"subrayado"**                      | Activa o desactiva el subrayado        |
+| **"nuevo"** / **"nuevo documento"**  | Crea un archivo en blanco              |
+| **"guardar"** /**"guardar archivo"** | Guarda el archivo actual               |
+
+### 📝 Funcionamiento
+
+El sistema escucha **un único comando** al activarse y ejecuta la acción correspondiente.  
+Su objetivo es permitir **control por voz del editor**, no dictado continuo de texto.
+
+---
+
 ## Tecnologías utilizadas
 
 - Python
