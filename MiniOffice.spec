@@ -2,11 +2,11 @@
 
 
 a = Analysis(
-    ['main.py'],
+    ['MiniOffice.py'],
     pathex=[],
     binaries=[],
     datas=[('images', 'images')],
-    hiddenimports=[],
+    hiddenimports=['pyaudio'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "MiniOffice"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "Ignacio Manuel Ortiz Martínez"
 #define MyAppExeName "MiniOffice.exe"
 

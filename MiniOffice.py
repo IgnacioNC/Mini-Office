@@ -3,6 +3,7 @@ import os
 from PySide6.QtWidgets import QMainWindow,QApplication, QLabel, QWidget, QDockWidget, QTextEdit, QToolBar, QFileDialog, QStatusBar, QHBoxLayout, QPushButton, QLineEdit, QVBoxLayout, QColorDialog, QFontDialog
 from PySide6.QtGui import QAction, QIcon, QKeySequence, QTextCursor, QTextCharFormat, QFont, QColor, QTextDocument
 from PySide6.QtCore import Qt, QSize
+import speech_recognition as sr
 
 class Ventana(QMainWindow):
     def __init__(self):
@@ -20,6 +21,7 @@ class Ventana(QMainWindow):
         self.shortCuts() # Asignación de los atajos de teclado.
         self.statusBar() # Creación de la barra de estado.
         self.statusBarMessage() # Mensaje inicial de la barra de estado.
+        self.accionReconocerVoz.triggered.connect(self.dictar_por_voz) # Activa el reconocimiento de voz y procesa el comando hablado
 
         self.accionNuevo.triggered.connect(self.nuevoArchivo)
         self.accionAbrir.triggered.connect(self.abrirArchivo)
@@ -174,6 +176,7 @@ class Ventana(QMainWindow):
         barra_herramientas.addAction(self.accionCortar)
         barra_herramientas.addAction(self.accionPegar)
         barra_herramientas.addAction(self.accionBuscarReemplazar)
+        barra_herramientas.addAction(self.accionReconocerVoz)
 
         barra_herramientas.setIconSize(QSize(32, 32))
 
@@ -272,6 +275,7 @@ class Ventana(QMainWindow):
         self.iconoLetraNegrita = os.path.join(os.path.dirname(__file__), "images/gordita.png")
         self.iconoLetraCursiva = os.path.join(os.path.dirname(__file__), "images/cursiva2.png")
         self.iconoLetraFuente = os.path.join(os.path.dirname(__file__), "images/letra.png")
+        self.iconoMicrofono = os.path.join(os.path.dirname(__file__), "images/microfono.png")
     
     def crearAcciones(self):
 
@@ -303,6 +307,8 @@ class Ventana(QMainWindow):
         self.accionBuscarReemplazar.setToolTip("Buscar y reemplazar texto en el documento (Ctrl+F)")
         self.accionTipoLetra.setToolTip("Cambiar propiedades de la letra (Ctrl+T)")
 
+        self.accionReconocerVoz = QAction(QIcon(self.iconoMicrofono), "Reconocer voz", self)
+
     def shortCuts(self):
         
         self.accionNuevo.setShortcut(QKeySequence("Ctrl+N"))
@@ -333,6 +339,8 @@ class Ventana(QMainWindow):
         self.menuEditar.addAction(self.accionCortar)
         self.menuEditar.addAction(self.accionPegar)
         self.menuEditar.addAction(self.accionBuscarReemplazar)
+
+        self.menuEditar.addAction(self.accionReconocerVoz)
 
         self.addAction(self.accionLetraNegrita)
         self.addAction(self.accionLetraCursiva)
@@ -575,6 +583,64 @@ class Ventana(QMainWindow):
         numCaracteres = len(self.texto.toPlainText())
 
         self.barraEstado.showMessage(str(numPalabras) + " palabras, " + str(numCaracteres) + " caracteres") 
+
+    def reconocer_voz(self):
+        recognizer = sr.Recognizer()
+
+        try:
+            with sr.Microphone() as source:
+                recognizer.adjust_for_ambient_noise(source, duration=0.6)
+                recognizer.pause_threshold = 1.2
+                recognizer.non_speaking_duration = 0.6
+
+                audio = recognizer.listen(
+                    source,
+                    timeout=5,
+                    phrase_time_limit=10
+                )
+
+        except sr.WaitTimeoutError:
+            return ""
+
+        except Exception:
+            return None
+
+        try:
+            texto = recognizer.recognize_google(audio, language="es-ES")
+            return texto.strip()
+
+        except sr.UnknownValueError:
+            return ""
+
+        except sr.RequestError:
+            return ""
+
+    def dictar_por_voz(self):
+        texto = self.reconocer_voz()
+        self.procesar_texto_de_voz(texto)
+
+    def procesar_texto_de_voz(self, texto):
+        if not texto:
+            return
+
+        texto = texto.lower()
+
+        if "negrita" in texto:
+            self.toggleNegrita()
+
+        elif "cursiva" in texto:
+            self.toggleCursiva()
+
+        elif "subrayado" in texto:
+            formato = QTextCharFormat()
+            formato.setFontUnderline(True)
+            self.texto.mergeCurrentCharFormat(formato)
+
+        elif "guardar" in texto or "guardar archivo" in texto:
+            self.guardarArchivo()
+
+        elif "nuevo" in texto or "nuevo documento" in texto:
+            self.nuevoArchivo()
 
 if __name__ == "__main__":
     app = QApplication([])
