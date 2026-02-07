@@ -40,6 +40,57 @@ Permite crear, editar y guardar documentos de texto con formato, incorporando fu
 
 ---
 
+## Documentación de señales
+
+### Señales del componente `WordCounterWidget`
+
+- `conteoActualizado(int palabras, int caracteres)`
+  Se emite cada vez que se llama a `update_from_text(...)` y se recalcula el conteo.  
+  Uso actual: el widget actualiza sus etiquetas internas de palabras, carácteres y tiempo de lectura.
+
+### Señales conectadas en `MiniOffice.py`
+
+- `QAction.triggered`
+  Conectada a acciones de menú y barra de herramientas:
+  `accionNuevo` → `nuevoArchivo`  
+  `accionAbrir` → `abrirArchivo`  
+  `accionGuardar` → `guardarArchivo`  
+  `accionSalir` → `salirAplicacion`  
+  `accionDeshacer` → `deshacerAccion`  
+  `acccionRehacer` → `rehacerAccion`  
+  `accionCopiar` → `copiarTexto`  
+  `accionCortar` → `cortarTexto`  
+  `accionPegar` → `pegarTexto`  
+  `accionBuscarReemplazar` → `menuBuscarReemplazar`  
+  `accionBuscar` → `buscarPalabra`  
+  `accionLetraNegrita` → `toggleNegrita`  
+  `accionLetraCursiva` → `toggleCursiva`  
+  `accionLetraColorFondo` → `elegirColorFondoLetra`  
+  `accionTipoLetra` → `elegirFuente`  
+  `accionReconocerVoz` → `dictar_por_voz`
+
+- `QTextEdit.textChanged`
+  Conectada a `statusBarMessage` para actualizar el componente de conteo al editar el documento.
+
+- `QDockWidget.topLevelChanged`
+  Conectada a `cambiarTamanioLayoutBusqueda` para ajustar el tamaÃ±o cuando el panel se acopla o flota.
+
+- `QDockWidget.visibilityChanged(bool)`
+  Conectada a `cambioVisibilidadDock` para limpiar resaltados y devolver el foco al editor.
+
+- `QLineEdit.textChanged`
+  `textoBuscarPalabra` → `buscarPalabra` para hacer busqueda en vivo.
+
+- `QPushButton.clicked`
+  Botones del panel de busqueda y reemplazo:
+  `Buscar siguiente` → `buscarSiguientePalabra`  
+  `Buscar anterior` → `buscarAnteriorPalabra`  
+  `Buscar todo` → `buscarTodasPalabras`  
+  `Reemplazar` → `reemplazarPalabra`  
+  `Reemplazar todo` → `reemplazarTodasPalabras`
+
+---
+
 ## Atajos de teclado
 
 | Acción              | Atajo            |
