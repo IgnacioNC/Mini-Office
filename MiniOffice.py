@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QMainWindow,QApplication, QLabel, QWidget, QDockWi
 from PySide6.QtGui import QAction, QIcon, QKeySequence, QTextCursor, QTextCharFormat, QFont, QColor, QTextDocument
 from PySide6.QtCore import Qt, QSize
 import speech_recognition as sr
+from contadorWidget import WordCounterWidget
 
 class Ventana(QMainWindow):
     def __init__(self):
@@ -575,14 +576,13 @@ class Ventana(QMainWindow):
 
         self.barraEstado = QStatusBar()
         self.setStatusBar(self.barraEstado)
+        self.contadorWidget = WordCounterWidget(parent=self)
+        self.barraEstado.addPermanentWidget(self.contadorWidget, 1)
 
     def statusBarMessage(self):
 
-        palabra = self.texto.toPlainText().split()
-        numPalabras = len(palabra)
-        numCaracteres = len(self.texto.toPlainText())
-
-        self.barraEstado.showMessage(str(numPalabras) + " palabras, " + str(numCaracteres) + " caracteres") 
+        texto_actual = self.texto.toPlainText()
+        self.contadorWidget.update_from_text(texto_actual)
 
     def reconocer_voz(self):
         recognizer = sr.Recognizer()
